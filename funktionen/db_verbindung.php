@@ -182,29 +182,21 @@ function EinzeilerAbfrage ($query)
     return $result;
 }
 
-
-function dbTest ()
-{
-  mysqli_report(MYSQLI_REPORT_OFF);
-
-  
-
+function dbTest() {
   $conn = mysqli_connect("database_hhp", "root", "", "hhp");
-
-  // $string_out = mysqli_connect_error();
-  // echo $string_out;
-
-  // var_dump(mysqli_connect_error());
-
-  if(mysqli_connect_error()=="Unknown database 'hhp'" or mysqli_connect_error()=='No such file or directory'){
-
-    echo"<script> dbErsteller() </script>";
-
-    exit();
+  if (mysqli_connect_error()) {
+      echo "<script> dbErsteller() </script>";
+      exit();
+  } else {
+      $result = mysqli_query($conn, "SHOW TABLES");
+      if(mysqli_num_rows($result) == 0) {
+          // No tables in the database, drop and recreate it
+          mysqli_query($conn, "DROP DATABASE hhp");
+          echo "<script> dbErsteller() </script>";
+          exit();
+      }
   }
-
   mysqli_close($conn);
-
 }
 
 function loginCheck($stammdaten) {
