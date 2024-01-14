@@ -1,0 +1,115 @@
+table.tabelle {font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               padding: 0;
+               margin: 0;
+               border-collapse:
+               collapse; color: #333;
+               background: #B3B2D1;
+               cursor: pointer;
+
+               }
+
+table.tabelle tbody {border-left: 1px solid #EAECEE; border-right: 1px solid #EAECEE;}
+
+table.tabelle tbody {border-bottom: 2px solid #EAECEE;}
+
+table.tabelle td
+{
+        font: bold 14px Verdana;
+        color: #000000;
+        border-right: 1px solid #EAECEE;
+        border-bottom: 1px solid #EAECEE;
+        border-top: 1px solid #EAECEE;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 18px;
+
+
+}
+
+table.tabelle tbody  tr:hover {
+	
+  background: #EAECEE; color: #111;
+  border-color:#555555;
+  margin: 0;
+  padding:0;
+  text-align:justify;}
+
+.Blocked
+{
+	background-color: #E85B5B; 
+}
+.Hinweis
+{
+	background-color: #77FF58; 	
+}
+
+.Hinweis:hover
+{
+  background: #EAECEE; color: #111;
+  text-align:justify; 	
+}
+
+.Blocked:hover
+{
+  background: #EAECEE; color: #111;
+  text-align:justify; 	
+}
+
+
+
+
+
+.kopf
+{
+        font: bold 35px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 12px;
+        text-align: left;
+}
+
+
+html {
+  background: url(heberghostwhite2.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+#range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:10px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+#box1{
+	
+  position: fixed;
+  top: 110px;	
+  right: 60px;	
+}
+#box2{
+	
+  position: fixed;
+  top: 360px;	
+  right: 60px;	
+}

@@ -1,0 +1,75 @@
+table.tabelle {font: 12px "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               padding: 0; margin: 0; border-collapse: collapse; background: #FFFFFF;}
+
+table.tabelle tbody, table.tabelle thead {}
+
+
+table.tabelle tbody {border-bottom: 1px solid #000000;}
+
+table.tabelle thead {border-bottom: 1px solid #000000;}
+
+table.tabelle tbody td, table.tabelle tbody th {}
+
+table.tabelle tr{background: #FFFFFF;}
+
+
+table.tabelle td, table.tabelle th {
+   border-left: 1px solid #000000; 
+   border-bottom: 1px solid #000000;}
+
+/*
+table.tabelle td:first-child, table.tabelle th:first-child {
+   border: none; }
+*/
+
+table.tabelle th
+{
+        font: bold 13px Verdana;
+        color: #000000;
+        padding: 12px 4px 12px 3px;
+        text-align: left;
+        font-weight: normal;
+
+}
+
+table.tabelle td
+{
+        font: 11px Verdana;
+        color: #444444;
+        padding: 6px 2px 6px 2px;
+        text-align: left;
+        font-weight: normal;
+
+}
+
+
+
+html {
+  background: #FFFFFF;
+}
+
+
+
+.kopf
+{
+        font: bold 16px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 12px;
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+#GwKl {
+	font: bold 11px Verdana;
+}

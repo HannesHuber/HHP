@@ -1,0 +1,162 @@
+a:link {
+    text-decoration: none;
+}
+
+html {
+  background: url(heberghostwhite2.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+.kopf
+{
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 12px;
+
+}
+
+.table {
+
+        width: 100%;
+        text-align: center;
+
+
+
+}
+
+
+
+.table tr{
+
+       height: 280px;
+
+}
+
+.table td{
+
+
+
+
+
+}
+
+
+
+
+.unter {
+
+         font: bold 20px Verdana;
+         color: #444444;
+
+         }
+
+
+.range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    width: 250px;
+    top:10px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+.Blocked {
+    background-color: #E85B5B;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    width: 250px;
+    top:10px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid 1C1C1C;
+
+        font: bold 30px Verdana;
+        color: 2B2B2B;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+
+#range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    bottom:100px;
+    left:15px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+#login {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:0cm;
+    left:1cm;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 25px Verdana;
+        color: #444444;
+        text-align: center;
+        text-decoration:none;
+        padding: 3px 8px 3px 8px;
+
+}
+
+#logout {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:0cm;
+    left:4cm;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 25px Verdana;
+        color: #444444;
+        text-align: center;
+        text-decoration:none;
+        padding: 3px 8px 3px 8px;
+
+}

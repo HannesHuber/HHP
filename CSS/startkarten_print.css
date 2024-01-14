@@ -1,0 +1,29 @@
+
+
+
+html {
+  background: #FFFFFF;
+}
+
+
+
+.kopf
+{
+
+display:none;
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+
+#page-break	{ display: block; page-break-before: always; }

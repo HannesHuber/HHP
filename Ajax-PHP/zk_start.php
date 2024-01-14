@@ -1,0 +1,250 @@
+<?php
+
+
+session_start();
+header('Content-Type: text/html; charset=utf-8'); // sorgt f�r die korrekte Kodierung
+header('Cache-Control: must-revalidate, pre-check=0, no-store, no-cache, max-age=0, post-check=0'); // ist mal wieder wichtig wegen IE
+
+if(!isset($ohneIncludeDbVerbindung))    $ohneIncludeDbVerbindung=0;
+if(!isset($OnlineWk))                   $OnlineWk=0;
+
+if($ohneIncludeDbVerbindung==0)
+    include '../funktionen/db_verbindung.php';
+
+    
+include '../Outsorst/start_tabellen_erstellen.php';
+$db=dbVerbindung();
+
+
+
+$Creat = $_POST['creat'];
+
+         basicErsteller();
+
+         dbBefehl("CREATE TABLE alters_klassen_zk_$Creat LIKE alters_klassen_zk");
+         dbBefehl("INSERT alters_klassen_zk_$Creat SELECT * FROM alters_klassen_zk");
+
+         // Block_Heben INT,
+         dbBefehl("CREATE TABLE stammdaten_wk_$Creat(
+                      Heber_pro_M INT,
+                      min_heber_pro_mann INT,
+                      Meisterschaft TEXT(100),
+                      Ort TEXT(100),
+                      Datum TEXT(100),
+                      Wk_Art TEXT(100),
+                      auto_mannschaft INT,
+                      V_Faktor Float (11,2),
+                      Laenderwertung INT,
+                      Kampfrichter INT,
+                      Gerd INT,
+                      Pokal INT,
+                      Gruppenteiler INT,
+                      Urkunden_hoehe INT,
+                      Anzahl_Heber_p_S INT,
+                      Masters INT,
+                      EineKlasse INT,
+                      Flagge INT,
+                      International INT,
+                      passwort Text(250),
+                      Mannschaft_Auswahl INT,
+                      GesGrpAlKl TEXT(100),
+                      LosNummern INT,
+                      Rel_Sin_AlKl INT,
+                      Hauptauswertung INT,
+					  Zeitnehmer INT,
+					  HHP_Hardware INT,
+					  Grp_Einteilung INT,
+					  DM INT,
+					  MitNorm INT,
+					  NormAlKl TEXT(100),
+					  UrkName1 TEXT(100),
+					  UrkName2 TEXT(100),
+					  UrkName3 TEXT(100),
+					  UrkName4 TEXT(100),
+                      Online_Wk INT,
+                      Online_Id_Wk VARCHAR(32),
+					  Uebersicht_Font DOUBLE(11,1),
+					  RelativArt INT,
+					  RobiVorfaktor Float (11,2),
+					  Kommentar Text(1000),
+					  StartNr INT,
+					  Block_Heben INT,
+					  Meldelast INT
+
+                      )");
+      if($OnlineWk==1){
+         dbBefehl("INSERT INTO stammdaten_wk_$Creat (Heber_pro_M, min_heber_pro_mann, Wk_Art, V_Faktor, Urkunden_hoehe, Anzahl_Heber_p_S, Masters,
+                   EineKlasse, Flagge, International, Gerd, Kampfrichter, Laenderwertung, Pokal, Gruppenteiler, GesGrpAlKl, LosNummern, Rel_Sin_AlKl, Hauptauswertung, Zeitnehmer,
+					HHP_Hardware, Grp_Einteilung, Mannschaft_Auswahl, DM, MitNorm, NormAlKl,
+                    Online_Wk, Datum, Online_Id_Wk, Ort, Uebersicht_Font,RelativArt, RobiVorfaktor, StartNr,Meldelast, Block_Heben)
+                      Values ('4','4', 'ZK', '0.5', '14', '25', '$Masters', '0', '0', '0', '0', '1', '1', '0', '0', 
+								'Aktive', '1', '0', '0', '0', '0', '0', '0', '0', '0', 'Aktive',
+         			'1', '$Datum', '$Online_Id_Wk', '$Ort' , '1.1', '1', '1', '0', '0', '0')"); 
+         // ,Block_Heben  , '0'
+      }else{
+          dbBefehl("INSERT INTO stammdaten_wk_$Creat (Heber_pro_M, min_heber_pro_mann, Wk_Art, V_Faktor, Urkunden_hoehe, Anzahl_Heber_p_S, Masters,
+                   EineKlasse, Flagge, International, Gerd, Kampfrichter, Laenderwertung, Pokal, Gruppenteiler, GesGrpAlKl, LosNummern, Rel_Sin_AlKl, Hauptauswertung, Zeitnehmer,
+					HHP_Hardware, Grp_Einteilung, Mannschaft_Auswahl, DM, MitNorm, NormAlKl,
+                    Online_Wk, Uebersicht_Font,RelativArt, RobiVorfaktor, StartNr,Meldelast,Block_Heben)
+                      Values ('4','4', 'ZK', '0.5', '14', '25', '0', '0', '0', '0', '0', '1', '1', '0', '0',
+								'Aktive', '1', '0', '0', '0', '0', '0', '0', '0', '0', 'Aktive', '0', '1.1', '1', '1', '0', '0', '0')");
+          //,Block_Heben , '0'
+      }
+
+         dbBefehl("CREATE TABLE heber_$Creat(
+                      IdHeber INT,
+                      Auswahl TEXT(100),
+                      Ausserkonkurrenz TEXT(100),
+                      Gruppe INT,
+                      Gruppe_Aus INT,
+                      StartNr INT,
+                      LosNr INT,
+                      Pokal INT,
+                      ZKLast INT,
+                      AlKlMain TEXT(100),
+                      GesGrp INT,
+                      Mannschaft_Auswahl INT,
+                      Norm_Heber INT,
+					  Nach_Meldung INT )");
+
+         dbBefehl("CREATE TABLE heber_wk_$Creat(
+                      IdHeber INT,
+                      Versuch INT,
+                      Reissen INT,
+                      Stossen INT,
+                      Div_Wert_R INT,
+                      Div_Wert_S INT,
+                      Gueltig_Reissen TEXT(100),
+                      Gueltig_Stossen TEXT(100),
+                      Reissen_Verzicht INT,
+                      Stossen_Verzicht INT,
+                      time_Reissen INT,
+                      time_Stossen INT,
+                      NH_Reissen INT,
+                      NH_Stossen INT,
+                      G_Reissen_1 TEXT(100),
+                      G_Stossen_1 TEXT(100),
+                      G_Reissen_2 TEXT(100),
+                      G_Stossen_2 TEXT(100),
+                      G_Reissen_3 TEXT(100),
+                      G_Stossen_3 TEXT(100),
+                      Time_Reissen_1 INT,
+                      Time_Stossen_1 INT,
+                      Time_Reissen_2 INT,
+                      Time_Stossen_2 INT,
+                      Time_Reissen_3 INT,
+                      Time_Stossen_3 INT ) ");
+
+         dbBefehl("CREATE TABLE gruppen_$Creat(Id INT)");
+         dbBefehl("INSERT INTO gruppen_$Creat (Id)
+                   Values ('1'), ('2'), ('3'), ('4'), ('5'), ('6'), ('7'), ('8'), ('9'), ('10')");
+
+         $Data_AlKl=dbBefehl("SELECT * FROM alters_klassen_zk");
+         $Data_AlKl_Master=dbBefehl("SELECT * FROM alters_klassen_masters");
+
+
+
+         $query1="ALTER TABLE gruppen_$Creat ";
+         $query2="UPDATE gruppen_$Creat SET";
+         $query3="";
+         while($dataAlKl = mysqli_fetch_assoc($Data_AlKl)){
+
+             $NeuAlKlGwKl_M="Gk_" . $dataAlKl['Klasse'] . "_M";
+             $NeuAlKlGwKl_W="Gk_" . $dataAlKl['Klasse'] . "_W";
+
+             $query1=$query1 . " ADD $NeuAlKlGwKl_M INT(11), ADD $NeuAlKlGwKl_W INT(11),";
+             $query2=$query2 . " $NeuAlKlGwKl_M=1, $NeuAlKlGwKl_W=1,";
+
+         }
+         $query1=substr($query1, 0, -1);
+         $query2=substr($query2, 0, -1);
+
+         dbBefehl($query1);
+         for($i=1;$i<11;$i++){
+               $query3=$query2 . " WHERE Id=$i";    dbBefehl($query3);
+         }
+
+         $query1="ALTER TABLE gruppen_$Creat ";
+         $query2="UPDATE gruppen_$Creat SET";
+         $query3="";
+         while($dataAlKl = mysqli_fetch_assoc($Data_AlKl_Master)){
+
+             $NeuAlKlGwKl_M="Gk_" . $dataAlKl['Klasse'] . "_M";
+             $NeuAlKlGwKl_W="Gk_" . $dataAlKl['Klasse'] . "_W";
+
+             $query1=$query1 . " ADD $NeuAlKlGwKl_M INT(11), ADD $NeuAlKlGwKl_W INT(11),";
+             $query2=$query2 . " $NeuAlKlGwKl_M=1, $NeuAlKlGwKl_W=1,";
+
+         }
+         $query1=substr($query1, 0, -1);
+         $query2=substr($query2, 0, -1);
+
+         dbBefehl($query1);
+         for($i=1;$i<11;$i++){
+               $query3=$query2 . " WHERE Id=$i";
+               dbBefehl($query3);
+         }
+
+         dbBefehl("CREATE TABLE auswertung_$Creat(
+                      IdHeber INT,
+                      Al_Kl TEXT(100),
+                      Gw_Kl INT,
+                      Gw_Kl_Norm INT,
+                      K_Gewicht float(11,2),
+                      R_Gewicht float(11,1),
+                      R_1 INT,
+                      R_2 INT,
+                      R_3 INT,
+                      S_1 INT,
+                      S_2 INT,
+                      S_3 INT,
+                      R_1_G TEXT(100),
+                      R_2_G TEXT(100),
+                      R_3_G TEXT(100),
+                      S_1_G TEXT(100),
+                      S_2_G TEXT(100),
+                      S_3_G TEXT(100),
+                      R_1_Ver INT,
+                      R_2_Ver INT,
+                      R_3_Ver INT,
+                      S_1_Ver INT,
+                      S_2_Ver INT,
+                      S_3_Ver INT,
+                      R_1_t INT,
+                      R_2_t INT,
+                      R_3_t INT,
+                      S_1_t INT,
+                      S_2_t INT,
+                      S_3_t INT,
+                      hoechste_time INT,
+                      R_B INT,
+                      S_B INT,
+                      Z_K INT,
+                      Relativ_P float(11,1),
+                      IAT_P float(11,1),
+                      Robbi_P float(11,4),
+                      Robbi_Quali_P float(11,4),
+                      Sinclair_P float(11,2),
+                      Sinclair_P_Malone_Meltzer float(11,2),
+                      Platz_GwKl INT,
+                      Platz_R INT,
+                      Platz_S INT,
+                      Platz_RP INT,
+                      Platz_Robi INT,
+                      Platz_Robi_Quali INT,
+                      Platz_Sin INT,
+                      Platz_Sin_Malone_Meltzer INT,
+                      Platz_Relativ_pro_JG INT,
+                      Platz_IAT INT,
+                      GwKl_GesGrp_Platz INT,
+                      Relativ_GesGrp_Platz INT,
+                      Sinclair_GesGrp_Platz INT,
+                      Al_Kl_GesGrp TEXT(100),
+                      Gw_Kl_GesGrp INT,
+                      Platz_R_Norm INT,
+                      Platz_S_Norm INT,
+                      Platz_Norm INT
+                      ) ");
+
+
+?>

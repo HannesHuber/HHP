@@ -1,0 +1,194 @@
+html {
+	background: #000000;
+}
+
+#divStange{
+	background-color: #c0c0c0;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:45.5%;
+    left:0%;
+    
+    height:9%;
+    width:90%;
+    
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border: 0px solid #ACBFFF;
+    
+    text-align: left;
+	font-family:'digital-clock-font';
+	font-size:6vh;
+	font-weight:normal;
+	color: black;	
+}
+
+#divStopper{
+	background-color: #c0c0c0;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:37.5%;
+    left:30%;
+    
+    height:25%;
+    width:3.5%;
+    
+    border-radius: 1em;
+    border: 0px solid #ACBFFF;
+}
+
+
+#ScheibenBox{
+	
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:0%;
+    left:33.5%;
+    
+    height:100%;
+    
+    border: 1px solid #000000;	
+}
+
+.Scheibe{
+    display: block;
+    position: fixed;
+    
+    border-radius:1.8em;
+    border: 1px solid #000000;	
+}
+
+.Gross{
+    top:7.5%;    
+    height:85%;
+}
+
+#kg25000{
+    border-radius:2.1em;
+	background-color: #ff0000;	
+}
+
+#kg20000{
+    border-radius:2em;
+	background-color: #0000ff;	
+}
+
+#kg15000{
+    border-radius:1.9em;
+	background-color: #ffff00;
+}
+
+#kg10000{
+    border-radius:1.8em;
+	background-color: #00cc00;	
+}
+
+#kg5000{
+    top:30%;    
+    height:40%;
+    
+	background-color: #ffffff;	
+}
+
+#kg2500{
+    top:31.5%;    
+    height:37%;
+    
+	background-color: #ff0000;	
+}
+
+#kg2000{
+    top:33%;    
+    height:34%;
+    
+	background-color: #0000ff;	
+}
+
+#kg1500{
+    top:34.5%;    
+    height:31%;
+    
+	background-color: #ffff00;	
+}
+
+#kg1000{
+    top:35.5%;    
+    height:28.5%;
+    
+	background-color: #00cc00;	
+}
+
+#kg500{
+    top:38%;    
+    height:24%;
+    
+	background-color: #ffffff;	
+}
+
+#verschluss1{
+    top:38%;    
+    height:24%;
+    
+	background-color: #ffffff;	
+}
+
+#verschluss1{
+    top:40%;    
+    height:20%;
+    
+    border-top-right-radius:0em;
+    border-bottom-right-radius:0em;
+    border-right: 0px solid #000000;	
+    
+	background-color: #808080;	
+}
+
+#verschluss2{
+    top:35%;    
+    height:30%;
+    
+    border-radius:0.5em;
+    border-radius:35%;
+    border-left: 1px solid #000000;	
+	background-color: #808080;	
+}
+
+
+.showGwBox {
+    background-color: #a2a2a2;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:10%;
+    left:5%;
+    border-radius: 1em;
+
+        text-align: center;
+        text-decoration:none;
+        padding: 0.4em 0.8em;
+
+}
+
+#showGw{
+	font-family:'digital-clock-font';
+	font-size:6vw;
+	font-weight:normal;
+	color: black;	
+}
+
+
+
+
+
+
+
+
+
+

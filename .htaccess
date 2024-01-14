@@ -1,0 +1,44 @@
+#######################################################################
+#     Diese .htaccess wurde vom STRATO-Webservermanager erstellt      #
+#######################################################################
+
+
+
+
+
+AddDefaultCharset UTF-8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Options -Indexes
+
+
+
+DirectoryIndex start.php
+ 
+
+
+
+
+
+
+
+

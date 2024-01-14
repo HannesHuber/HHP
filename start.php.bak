@@ -1,0 +1,359 @@
+<?php
+session_start();
+if (empty($_SESSION['WeK'])) {
+    $_SESSION['WeK'] = '';
+}
+if (empty($_SESSION['ReloadFromDbBefehl'])) {
+    $_SESSION['ReloadFromDbBefehl'] = 0;
+}
+if (empty($_SESSION['ReloadFromDbBefehlChecker'])) {
+    $_SESSION['ReloadFromDbBefehlChecker'] = 0;
+}
+$_SESSION['user'] = 0;
+
+//session_destroy();
+
+header('Content-Type: text/html; charset=utf-8');
+
+?>
+<html>
+<head>
+<title>Ultima</title>
+<meta name="author" content="H-Pc">
+<meta name="editor" content="html-editor phase 5">
+
+
+<link rel="stylesheet" type="text/css" href="CSS/alg.css">
+<link rel="stylesheet" type="text/css" href="CSS/start.css">
+
+<script type='text/javascript' src="jquery-2.2.1.min.js"></script>
+<script type='text/javascript' src="JS/start_funktionen.js"></script>
+
+</head>
+
+<body>
+
+<script>
+function myFunction() {
+    location.reload();
+}
+</script>
+
+<form method="post" action="start.php">
+<br><br><br><br><br><br>
+
+
+<span id="ajaxtest"></span>
+<span id="ajax-loeschen"></span>
+<span id="mkot_ersteller"></span>
+<span id="mkmt_ersteller"></span>
+
+<div id="modal">
+  <div class="spinner">
+     <div class="bounce1"></div>
+     <div class="bounce2"></div>
+     <div class="bounce3"></div>
+  </div>
+</div>
+
+<?php
+
+ob_start();
+error_reporting(-1);
+//Version!!!
+//Update 1.016 für Offline Liga kein Löschen beim Speichern in Meldeliste-Anlegen f�r BL
+//Update 1.017 unter zk_start die gruppen_$Creat von 8 auf 10 erh�ht, damit die Grp einteilung der Masters funktioniert
+//Update 1.018 Komplett erneuerung der Reload Funktion f�r alle sich selbst ernuerden Anzeigen z.B. Übersicht
+//Update 1.019 Fix nach Anzeigen Update, damit wieder Korrekt 3 Striche bei 3Kr angezeigt werden und damit das Ergebniss �ber Wk pads korrekt angezeigt wird
+//Update 1.021 Wenn Masters Aktiv dann in ZK auswertung mit Sinclair
+//Mannschaften Fix das auch mindest Anzahl gewertet wird
+//Auto erfassung der Altersklassen jetzt beim Speichern in Stammdaten und Meldeliste
+//Update 1.022 Auch Online Vereine werden nun in Offline BL Vereins Auswahl angezeigt
+//Update 1.023 Fix Einzel Kr Fix f�r Anzeige
+//Update 1.024 Fix Altersklassen hinzuf�gen
+//Update 1.025 Fix Gruppeneinteilung in f�r mk-Wk 
+//Update 1.027 Mehrkampf Mannschaften k�nnen nun nach Relativ oder Mk Gesamt ausgewertet werden
+//Update 1.028 Update f�r die �bersicht f�r die Zuschauer
+//Update 1.029 Robi Wertung f�r ZK in �bersicht sowie Auswertung
+//Update 1.029 Kommentare kann man nun Speichern (Vorbereitung auf hochlade Update)
+//Update 1.031 Diverse anpassungen für Internationale Wk's z.B. Wiegeliste mit StartNr nach GwKl nach LosNr + StartNr auf Anzeige + Übersicht Farbanpassungen
+//Update 1.032 Dezentrales Steigern + Neue Spalte in wk_reload_$WkNummer Grp mit Reload Iterationen in Dezentralen Steigerungen
+//Update 1.033 Bundesliga Season Update 
+//Update 1.034 Bundesliga Season Update mit kommentar Upload
+//Update 1.035 Bundesliga Season Update mit kommentar Upload
+//Update 1.036 Korrekte Vorhersage des 3. Versuchs in der Versuchsreihenfolge
+//Update 1.037 Übersicht in Bl kann nun zwischen Gruppe und Vereins Sortierung wechseln Neuer Wk needed (änderungen in Stammdaten)
+//Update 1.038 Fixed Startgeb�hren zu Startgebueren Coding error
+//Update 1.040 Überarbeitung allen Codes von ASCII zu Unix codierung + Fix von Heberreihenfolge!
+//Update 1.041 Fix nun auch richtige Reihenfolge auf allen ANzeigen + tmp_gerd_$bridge
+//Update 1.042 Neue hinterlegte DB für neuinstallation oder DB reset
+//Update 1.043 Update der Stammdaten, jetzt kann die Meldelast extra ausgewählt werden, damit diese bei der Teilnehmerliste angezeigt wird
+//Update 1.044 DM Schüler Update, DM Herren Update + Speicher Buttons Update
+//Update 1.045 Update für "Neuer Heber" Button für heruntergeladene Bundesliga Wettkämpfe dieser Löscht nun alle alten Heber mit der selben OnlineID und erstellt dann einen neuen
+//Update 1.046 Update nHeber_funktion/Pad-Resett && hinzufügen von tmp_absignal_1/2 für Absignal ausgehend von Wk-Pads
+//Update 1.047 Heber outsorst/heber_auswahl_zk.php ANSI->UTF8 (Unterschied für Masters)
+//Update 1.048 Anpassung der Liga Gruppen, damit Liga SW überall 3 Gruppen zur Auswahl haben (vorallem für wk-Korrektur)
+//Update 1.049 Einführung Blockheben option in Stammdaten für ZK
+//Update 1.049 Mehrkampf: 2 Nachkommastellen für Distanzen/Zeit für Mehrkampfdisziplinen überall, BL-EinzelheberAnzeige=> GwKLasse -> KöGw
+//Update 1.049 Außerdem entfernung nicht funktionsfähiger DB backup und DB import funktionen unter start/einstellungen/alg_einstellungen
+//Update 1.050 Entfernen von Block_Heben in ZK/MK/Masters
+//Update 1.051 Bug Fix Relativabzug für KöGw > 160kg jetzt möglich
+//Update 1.052 Online_import Einzelmeisterschaft fix
+//Update 1.053 Update Urkunden DM Aktive
+//Update 1.054 Update verein-heber-auswahl.php --> if($OnlineWk==1) => getrennt für online und offline
+//Update 1.055 Bug Fix Sternlauf MK Auswertung
+//Update 1.056 Bug Fix Sternlauf asuwertung_funktionen.php
+
+
+/* Regelt die Updates:
+if($Version['Versionsnummer']!=$Version_Now){
+	echo"<script> dbUpdate($Version_Now) </script>"; //Von JS/start_funktionen.js und führt zu Ajax-PHP/db_update.php
+}
+*/
+
+//-----------------------------------------------------------------------------------------------------------------------
+$Version_Now=1.055;
+echo '<a id="Versionsnummer"> Version: '. $Version_Now .'</a>';
+//-----------------------------------------------------------------------------------------------------------------------
+
+include 'funktionen/db_verbindung.php';
+
+function PruefeObFeldExistiertSonstAnlegen($tabellenname, $feldname, $feldArt){
+    global $db;
+    
+    
+    
+    //Pr�fe ob tmp_ss_reload_$bridge ist erweiter (Seit Bundesliga Neu 23.09.2018)
+    $result = dbBefehl("SHOW COLUMNS FROM $tabellenname");
+    
+    $_tablespecs = array();   // alle Properties aller Felder der Tabelle
+    $_record = array();       // Zwischenpuffer f�r die Abfrage
+    
+    
+    while($_record = mysqli_fetch_assoc($result))
+    {
+        $_tablespecs[$_record['Field']] = $_record;
+    }
+    
+    if (isset($_tablespecs[$feldname]))
+    {
+        //echo "Feld existiert.";
+    }else{
+        //echo "Feld existiert nicht.";
+        $QueryAlter="ALTER TABLE $tabellenname ADD $feldname $feldArt";
+        dbBefehl($QueryAlter);
+        
+    }
+   
+    
+}
+
+
+
+dbTest();
+
+
+include 'Outsorst/start_tabellen_erstellen.php';
+//Javascript weist auf PHP in Ajax-PHP Ordner
+$db=dbVerbindung();
+
+$query="SELECT * FROM datenbanken WHERE Id_Db NOT IN ('0')";	//nicht NULL wegen redirect to start in code jede Seite
+
+$result = dbBefehl($query);
+
+
+
+
+$val = mysqli_query($db,'Select * From versions_tabelle');
+
+if($val == FALSE)
+{
+    echo "nicht da";
+    
+    dbBefehl("
+     CREATE TABLE versions_tabelle(
+     Id INT,
+     Versionsnummer FLOAT(11,3)
+     )
+     ");
+    
+    dbBefehl("INSERT INTO versions_tabelle (Id, Versionsnummer)
+                      Values ('1', '1')");
+     
+}
+
+$Version_Data = dbBefehl('Select * From versions_tabelle Where Id="1"');
+$Version = mysqli_fetch_assoc($Version_Data);
+
+if($Version['Versionsnummer']!=$Version_Now){
+      echo"<script> dbUpdate($Version_Now) </script>"; //Von JS/start_funktionen.js und f�hrt zu Ajax-PHP/db_update.php
+}
+
+
+$x=0;
+
+echo '<p class="kopf" align="left"><font size="10"><b>Datenbanken</font></b></p>';
+
+
+echo "
+<div style=\"text-align: left;\">";
+echo "
+<table class=\"tabelle\"   border=\"1\" cellpadding=\"0\" cellspacing=\"2\">
+<thead>
+
+ <tr>
+  <th>Datenbanken</th>
+  <th>Laden</th>
+ </tr>
+
+
+</thead>
+
+";
+
+$i = 0;
+
+while ($dsatz = mysqli_fetch_assoc($result)) {
+
+
+$i = $i+1;
+
+     $Id="Id" . $i;
+     $DB="DB" . $i;
+     $Loeschen="Loeschen" . $i;
+     $Laden="Laden" . $i;
+
+
+
+echo "<input type=\"text\" name=$Id size=\"0\" style=\" visibility:hidden; \" value=\"$dsatz[Id_Db]\"readonly>";
+
+
+echo "<tbody>";
+
+
+echo "<tr>";
+
+
+     echo "<td>";
+
+
+          echo "<input type=\"text\" name=$DB size=\"100\" value=\"$dsatz[Datenbank]\" readonly>";
+			
+          //Weiterleitung �ber JS/start_funktionen zu Ajax-PHP/loeschen_start.php
+          echo "<button type=\"button\" id=\"$Loeschen\" name=\"$Loeschen\" onclick=\"loeschen(this.value)\" value=\"$dsatz[Id_Db]\">Loeschen</button>";
+
+     echo "</td>";
+
+
+     echo "<td align=\"center\">";
+
+          echo "<input type=\"submit\" name=$Laden value=\"Laden\">";
+
+     echo "</td>";
+
+
+echo "</tr>";
+
+
+         if(isset($_POST['Laden' . $i]))                                                  //Laden
+         {
+                 $Sdb= "" . $_POST['Id' . $i] . "";
+
+                 $_SESSION['WeK']=$Sdb;
+
+                 dbBefehl("DELETE FROM tmp_db");
+                 dbBefehl("INSERT INTO tmp_db (S_Db) Values ('$Sdb')");
+
+                 echo"
+                    <script>
+                         setTimeout(function(){
+                            location = 'index.php'
+                         },0)
+                   </script>
+                 ";
+
+         }
+
+
+}
+
+
+echo "</tbody>";
+echo "</table>";
+
+echo"<br>";
+
+echo "
+
+<table width=\"600\"  border=\"0\" cellpadding=\"0\" cellspacing=\"2\" align=\"left\">
+
+";
+
+  echo "<tr>";
+
+     echo "<td>";
+
+         $SpF = "Speicherfeld";
+         echo"Wettkampftitel:";
+         echo "<input type=\"text\" id=\"Speicherfeld\" name=$SpF size=\"60\">";                           //Speicher Eingabefeld
+
+     echo "</td>";
+     echo "<td>";
+
+
+
+     echo "</td>";
+
+     echo "</tr>";
+
+
+
+  echo "</tr>";
+
+  echo "<tr>";
+
+    echo"<td>";
+
+    echo"</td>";
+
+
+    echo"<td>";
+
+         echo "<button type=\"button\" id=\"zk-load\" name=\"new_wettkampf\" onclick=\"zk_ersteller()\">Neuer Zweikampf - Wettkampf</button>";
+         echo "<button type=\"button\" id=\"mkot-button\" name=\"new_mkot\" onclick=\"mk_o_t_ersteller()\">Neuer Mehrkampf ohne Technikwertung</button>";
+         echo "<button type=\"button\" id=\"mkmt-button\" name=\"new_mkmt\" onclick=\"mk_m_t_ersteller()\">Neuer Mehrkampf mit Technikwertung</button>";
+         echo "<button type=\"button\" id=\"bl-button\" name=\"new_bl\" onclick=\"bl_ersteller()\">Neuer Ligakampf</button>";
+    echo"</td>";
+
+
+  echo"</tr>";
+
+echo "</tbody>";
+echo "</table>";
+
+echo"</div>";
+
+
+
+if($x==1)
+{
+echo"
+ <script>
+ setTimeout(function(){
+     location = 'start.php'
+   },0)
+ </script>
+";
+}
+
+
+?>
+
+<a href="/einstellungen/alg_einstellungen.php" title="Link zu Einstellungen" id="range-logo">Einstellungen</a>
+
+<a href="/import_auswahl.php" title="Link zum WK-Import" id="range-logo-unten">WK-Import</a>
+
+
+</form>
+</body>
+</html>
