@@ -1,0 +1,112 @@
+table.tabelle {font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               padding: 0; margin: 0; border-collapse: collapse; background: #FFFFFF;}
+
+
+table.tabelle tr{background: #FFFFFF;}
+
+
+table.tabelle td, table.tabelle th {
+   border-left: 1px solid #000000; }
+
+table.tabelle td:first-child, table.tabelle th:first-child {
+   border: none; }
+
+
+table.tabelle th
+{
+        font: bold 15px Verdana;
+        color: #000000;
+        padding: 2px 1px 2px 1px;
+        text-align: center;
+        font-weight: normal;
+	
+}
+
+table.tabelle td
+{
+        font: 13px Verdana;
+        color: #000000;
+        padding: 2px 1px 2px 1px;
+        text-align: center;
+
+}
+
+#page-break {page-break-before:always;}
+
+
+h3{
+font-size: 30px;
+}
+
+
+
+#Klasse {
+
+
+border-bottom: 1px solid #000000;
+border-top: 1px solid #000000;
+}
+
+
+
+
+#Klasse td{
+
+font: 14px Verdana;
+color: #000000;
+padding: 2px 1px 2px 1px;
+
+background-color: #F2F2F2;
+-webkit-print-color-adjust: exact
+}
+
+
+
+
+
+html {
+  background: #FFFFFF;
+}
+
+
+
+.kopf
+{
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+		padding: 2px 1px 2px 1px;
+		display:none;
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+#button {
+
+display:none;
+
+}
+
+#unsichtbar {
+
+        font: bold 15px Verdana;
+        color: #000000;
+        text-transform: uppercase;
+		padding: 2px 1px 2px 1px;
+        text-align: left;
+        font-weight: normal;
+
+
+}
+
+

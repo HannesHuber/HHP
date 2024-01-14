@@ -1,0 +1,139 @@
+@page { size:landscape; }
+
+
+table.tabelle {font: 100% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               margin: 0; border-collapse: collapse; background: #FFFFFF;}
+
+table.tabelle tbody, table.tabelle thead {}
+
+
+table.tabelle thead {border-bottom: 1px solid #000000;}
+
+table.tabelle tbody {border-bottom: 1px solid #000000;}
+
+
+
+table.tabelle tbody td, table.tabelle tbody th {}
+
+
+table.tabelle td, table.tabelle th {
+   border-left: 1px solid #000000; }
+
+table.tabelle td:first-child, table.tabelle th:first-child {
+   border: none; }
+
+
+table.tabelle th
+{
+        font: bold 10px Verdana;
+        color: #000000;
+        text-align: left;
+        font-weight: bold;
+
+}
+
+table.tabelle td
+{
+        font: 10px Verdana;
+        color: #000000;
+        text-align: left;
+        font-weight: normal;
+		padding: 2px 2px 2px 2px;
+}
+
+#Klasse {
+
+border-bottom: 1px solid #000000;
+border-top: 1px solid #000000;
+}
+
+
+#Klasse td{
+
+font: 10px Verdana;
+color: #000000;
+padding: 2px 2px 2px 2px;
+
+background-color: #F2F2F2;
+-webkit-print-color-adjust: exact
+}
+
+.center {display:table-cell;}
+#display {display:table-cell; text-align: center; font:  11px Verdana;}
+#displayL {display:table-cell; text-align: left; font:  11px Verdana;}
+
+
+html {
+  background: #FFFFFF;
+}
+
+
+
+.kopf
+{
+        font: bold 15px Verdana;
+        color: #000000;
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+#unsichtbar {
+
+        font: bold 12px Verdana;
+        color: #000000;
+        text-transform: uppercase;
+        text-align: left;
+        font-weight: normal;
+}
+
+
+#un {
+	position: relative;
+    background-color: #f8f8ff;
+    display:table-cell;
+    overflow:hidden;
+    white-space:nowrap;
+       
+    color: #444444;
+    text-align: center;
+    text-decoration:none;
+}
+
+#page-break {page-break-before:always;}
+
+
+.linie {
+display: inline;
+text-align: center;
+border :none;
+border-top: 1px solid #8B8B8B;
+
+height: 1px;
+margin: 0px 80px 0px 80px;
+width: 6cm;
+}
+
+textarea {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font: 12px Verdana;
+    resize: none;
+}
+
+

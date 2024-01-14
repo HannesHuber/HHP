@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"
+  database_hhp:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: hhp
+    volumes:
+      - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: database_hhp
+      MYSQL_ROOT_PASSWORD: ''
+    ports:
+      - "8080:80"
+    depends_on:
+      - database_hhp
+
+volumes:
+  dbdata:

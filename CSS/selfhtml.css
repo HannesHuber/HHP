@@ -1,0 +1,50 @@
+.table {
+
+  width: 600px
+
+
+}
+
+#strich{
+width: 90
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+.kopf {
+
+        font: bold 25px Verdana;
+        color: #444444;
+        border-bottom: 1px solid #FEFDFC;
+        border-top: 1px solid #FEFDFC;
+        text-align: center;
+}
+
+
+
+body { background-color:#FEFEFD; }
+
+textarea {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font: 12px Verdana;
+    resize: none;
+}
+
+#page-break {page-break-before:always;}

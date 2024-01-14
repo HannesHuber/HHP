@@ -1,0 +1,134 @@
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('Fonts/digital-7.ttf');
+}
+
+.div_1 {
+
+  display: block;
+  background-color: #EFEFEF;
+  width: 26%;
+  padding: 2px 6px 2px 12px;
+  border-radius: 12px;
+  border: 1px solid #49556A;
+  box-shadow: 8px 8px 8px #666;
+
+
+
+}
+
+.div_2 {
+
+  display: block;
+  background-color: #EFEFEF;
+  width: 26%;
+  padding: 2px 6px 2px 12px;
+  border-radius: 12px;
+  border: 1px solid #49556A;
+  box-shadow: 8px 8px 8px #666;
+
+
+}
+
+.div_3 {
+
+  display: block;
+  background-color: #EFEFEF;
+  width: 26%;
+  padding: 2px 6px 2px 12px;
+  border-radius: 12px;
+  border: 1px solid #49556A;
+  box-shadow: 8px 8px 8px #666;
+
+}
+
+.showTimeBox {
+    background-color: black;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:0;
+    right:0;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid yellow;
+
+        font: bold 4vmin Verdana;
+        color: yellow;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 1vmin;
+
+}
+
+#showTime{
+	font-family:'digital-clock-font';
+	font-size:10vmin;
+	font-weight:normal;
+	color: red;	
+}
+
+#JuryDiv{
+	display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:0px;
+    right:0px;
+	width:auto;
+	height:25%;
+	
+	border-style: solid;
+    border-width: 3px;
+	border-color: #ff8040;
+	
+	background-color: #ffffff;
+}
+#JuryName{	
+		font: bold 5vmin Helvetica;
+        letter-spacing: 0px;
+        text-align: center;	
+        
+}
+
+#JuryName{	
+		font: bold 5vmin Helvetica;
+        letter-spacing: 2px;
+        text-align: center;	
+        text-decoration: overline;
+        text-decoration: underline;
+}
+#JuryVersuch{	
+		font: bold 5vmin Helvetica;
+        letter-spacing: 0px;
+        text-align: center;		
+}
+#JuryGueltig{	
+		font: bold 5vmin Helvetica;
+        text-align: center;		
+}
+.JuryGueltig, .JuryUngueltig{	
+	display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:15%;
+    right:3%;
+    
+	border-style: solid;
+    border-width: 1px;
+	border-color: black;
+	width:19.0%;	
+	height:5%;
+	
+}
+.JuryGueltig{
+	background-color: #09F906;	
+}
+
+.JuryUngueltig{		
+	background-color: #F90E1C;
+}

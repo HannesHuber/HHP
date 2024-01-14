@@ -1,0 +1,366 @@
+<?php
+
+$data_a_db[S_Db]=$_SESSION['WeK'];
+
+$Gruppen = dbBefehl("SELECT * FROM gruppen_zeit_$data_a_db[S_Db]");
+
+if($Art=="Reissen"){
+    $Kurz="R";
+}else{
+    $Kurz="S";
+}
+
+$datenbank = dbBefehl("SELECT * FROM stammdaten_wk_$data_a_db[S_Db]");
+
+$stammdaten = mysqli_fetch_assoc($datenbank);
+
+
+if($stammdaten['Zeitnehmer']!='0'&& $counter==0){
+    $counter++;
+    echo '<div class="showTimeBox">Heber<br>Zeit<br><span id="showTime"></span></div>';       //HEBER ZEIT ANZEIGE
+}
+    try {
+        /*
+         $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], staaten, verein
+         WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+         AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+         AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+         AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+         AND (heber_wk_$data_a_db[S_Db].Gueltig_$Art = '' OR heber_wk_$data_a_db[S_Db].Gueltig_$Art IS NULL)
+         AND heber.IdStaat=staaten.IdStaat
+         AND heber.IdVerein = verein.IdVerein
+         ORDER BY heber_wk_$data_a_db[S_Db].$Art ASC,
+         heber_wk_$data_a_db[S_Db].Versuch ASC,
+         heber_wk_$data_a_db[S_Db].Div_Wert_$Kurz DESC,
+         heber_$data_a_db[S_Db].LosNr ASC");
+         */
+        
+        if($stammdaten[Wk_Art]=='BL'){
+            
+            if($stammdaten[Block_Heben]=='0'){
+            	
+            	$StringOrderBy=" ORDER BY heber_$data_a_db[S_Db].Gruppe ASC,
+            	heber_wk_$data_a_db[S_Db].$Art ASC,
+            	heber_wk_$data_a_db[S_Db].Versuch ASC,
+            	heber_wk_$data_a_db[S_Db].Div_Wert_$Kurz ASC,
+            	heber_$data_a_db[S_Db].LosNr ASC";
+            	
+            }elseif($stammdaten[Block_Heben]=='1'){
+            	
+            	
+            	$StringOrderBy=" ORDER BY heber_$data_a_db[S_Db].Gruppe ASC,
+            	heber_wk_$data_a_db[S_Db].Versuch ASC,
+            	heber_wk_$data_a_db[S_Db].$Art ASC,
+            	heber_wk_$data_a_db[S_Db].Div_Wert_$Kurz ASC,
+            	heber.Gewicht ASC";
+            	
+            }
+            
+            if($stammdaten[Gerd]==0){
+                
+                if($Art=="Reissen"){       //Da nicht alle f�r Reissen und Stossen starten
+                    
+                    $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+						WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+						AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+						AND (heber_wk_$data_a_db[S_Db].Gueltig_$Art = '' OR heber_wk_$data_a_db[S_Db].Gueltig_$Art IS NULL)
+						AND (heber_$data_a_db[S_Db].R_uo_S = '0' OR heber_$data_a_db[S_Db].R_uo_S = '1')
+						".$StringOrderBy);
+                }else{     //F�r Stossen
+                    
+                    $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+						WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+						AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+						AND (heber_wk_$data_a_db[S_Db].Gueltig_$Art = '' OR heber_wk_$data_a_db[S_Db].Gueltig_$Art IS NULL)
+						AND (heber_$data_a_db[S_Db].R_uo_S = '0' OR heber_$data_a_db[S_Db].R_uo_S = '2')
+						".$StringOrderBy);
+                }
+                
+                
+                
+            }else{   //Gerd==1
+                
+                if($Art=="Reissen"){       //Da nicht alle f�r Reissen und Stossen starten
+                    
+                    $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+						WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+						AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+						AND (heber_wk_$data_a_db[S_Db].NH_$Art = '' OR heber_wk_$data_a_db[S_Db].NH_$Art IS NULL
+						AND (heber_$data_a_db[S_Db].R_uo_S = '0' OR heber_$data_a_db[S_Db].R_uo_S = '1')
+						OR heber_wk_$data_a_db[S_Db].NH_$Art = '0')
+						".$StringOrderBy);
+                    
+                }else{
+                    
+                    $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+						WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+						AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+						AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+						AND (heber_wk_$data_a_db[S_Db].NH_$Art = '' OR heber_wk_$data_a_db[S_Db].NH_$Art IS NULL
+						AND (heber_$data_a_db[S_Db].R_uo_S = '0' OR heber_$data_a_db[S_Db].R_uo_S = '2')
+						OR heber_wk_$data_a_db[S_Db].NH_$Art = '0')
+						".$StringOrderBy);
+                }
+                
+            }
+            
+            
+            
+            
+        }else{       //Für wenn nicht BL
+
+			if($stammdaten[Block_Heben]=='0'){
+				$StringOrderBy=" ORDER BY   heber_wk_$data_a_db[S_Db].$Art ASC,
+				heber_wk_$data_a_db[S_Db].Versuch ASC,
+				heber_wk_$data_a_db[S_Db].Div_Wert_$Kurz ASC,
+				heber_$data_a_db[S_Db].LosNr ASC";
+			
+			}elseif($stammdaten[Block_Heben]=='1'){           	           	
+            	$StringOrderBy=" ORDER BY heber_$data_a_db[S_Db].Gruppe ASC,
+            	heber_wk_$data_a_db[S_Db].Versuch ASC,
+            	heber_wk_$data_a_db[S_Db].$Art ASC,
+            	heber_wk_$data_a_db[S_Db].Div_Wert_$Kurz ASC,
+            	heber.Gewicht ASC";
+            	
+            }
+            
+            if($stammdaten[Gerd]==0){
+                
+                $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+					WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+					AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+					AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+					AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+					AND (heber_wk_$data_a_db[S_Db].Gueltig_$Art = '' OR heber_wk_$data_a_db[S_Db].Gueltig_$Art IS NULL)
+					" . $StringOrderBy);
+                
+            }else{
+                
+                $heber = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db], heber, heber_wk_$data_a_db[S_Db], verein
+					WHERE heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+					AND heber_wk_$data_a_db[S_Db].IdHeber = heber.IdHeber
+					AND heber_wk_$data_a_db[S_Db].IdHeber = heber_$data_a_db[S_Db].IdHeber
+					AND heber_$data_a_db[S_Db].Gruppe = '$Grp'
+                        AND heber.IdVerein=verein.IdVerein
+					AND (heber_wk_$data_a_db[S_Db].NH_$Art = '' OR heber_wk_$data_a_db[S_Db].NH_$Art IS NULL
+					OR heber_wk_$data_a_db[S_Db].NH_$Art = '0')
+					" . $StringOrderBy);
+                
+            }
+            
+        }        //Ende else BL
+        
+        
+        
+    }catch(exception $e) {
+        echo'<script type="text/javascript">
+                 location.reload();
+         </script>';
+    }
+    
+
+    
+    echo"<div id=\"divid1\" class=\"examplediv\">";
+    
+$num_rows_heber=mysqli_num_rows($heber); 
+if($num_rows_heber!=0){
+  
+
+    
+    echo "        
+<table class=\"tabelle\" border=\"1\" cellpadding=\"0\" cellspacing=\"2\">
+  <colgroup>
+    <col width=\"25\">
+    <col width=\"300\">
+    <col width=\"90\">
+    <col width=\"50\">";
+    if($stammdaten[International]=='0' || $stammdaten[International]==NULL) echo "<col width=\"220\">";
+    else echo "<col width=\"80\">";
+    echo "
+    <col width=\"50\">
+    <col width=\"65\">
+    ";   
+    echo "</colgroup>";
+    
+    echo"
+<thead>
+
+<tr>
+  <th colspan=\"2\">Gruppe $Grp</th>
+  <th colspan=\"5\">$Art</th>
+  
+</tr>
+
+
+ <tr>
+  <th>Id</th>
+  <th>Heber</th>
+  <th>KG</th>
+  <th>JG</th>";
+    if($stammdaten[International]=='0' || $stammdaten[International]==NULL) echo '<th>Verein</th>';
+    else echo '<th>Staat</th>';
+    echo"<th>V</th>
+  <th>Last</th>
+ </tr>
+</thead>
+";
+    
+} //If num Heber != 0 Ende
+
+    $i = 0;
+    
+    
+    while($dsatz = mysqli_fetch_assoc($heber))
+    {
+        
+        $i = $i+1;
+        
+        if ($i % 2 != 0) {                                            //ungerades und gerades i indikator
+            
+            echo "<tbody class=\"ungerade\">";
+            
+        } else {
+            
+            echo "<tbody class=\"gerade\">";
+            
+        }
+        
+        echo "<td>";
+        
+        echo "$i";
+        
+        echo "</td>";
+        
+        
+        
+        echo "<td>";
+        
+        echo "<span style=\"width:150px;display:block;float:left;\"> $dsatz[Name] </span>";
+        
+        echo "$dsatz[Vorname]";
+        
+        echo "</td>";
+        
+        
+        echo "<td>";
+        
+        
+        echo "$dsatz[Gewicht] Kg";
+        
+        
+        echo "</td>";
+        
+        
+        
+        echo "<td>";
+        
+        
+        echo "$dsatz[Jahrgang]";
+        
+        
+        echo "</td>";
+        
+        
+        
+        echo "<td>";
+        if($stammdaten[International]=='0' || $stammdaten[International]==NULL)echo "$dsatz[Verein]";
+        else echo "$dsatz[Staat]";
+        echo "</td>";
+        
+        
+        
+        echo "<td>";
+        
+        
+        echo "$dsatz[Versuch]";
+        
+        
+        echo "</td>";
+        
+        echo "<td>";
+        
+        
+        echo "$dsatz[$Art]  Kg";
+        
+        
+        echo "</td>";
+        
+        echo "</tr>";
+        
+        
+        
+        
+        
+        if($i == "1")
+        {
+            $time = $dsatz[time];
+            
+            
+            if($time != "")
+            {
+                
+                
+                echo "
+  <script type=\"text/javascript\">
+                    
+                    
+  var daten = \"".$time."\";
+      
+      
+      
+      
+      
+   function stoppuhr()
+  {
+      
+         aktuell = new Date();
+         time = aktuell.getTime()/1000 - daten;
+      
+      
+         if(time>= 0){
+      
+                 document.getElementById('spanId').innerHTML =Math.round(time);
+                 setTimeout('stoppuhr()',1000);
+         }else{
+                 document.getElementById('spanId').innerHTML = 0;
+         }
+      
+      
+      
+   }
+      
+  </script>
+";
+                
+            }
+        }
+        
+    }                                                                        //While-Schleife zu ende
+   echo '</table>';
+   
+   echo"</div>";
+   
+   
+
+    
+    echo'<div id="newlA"></div>';
+    
+    
+
+?>
+
+
+</body>
+</html>

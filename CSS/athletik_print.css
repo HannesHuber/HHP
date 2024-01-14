@@ -1,0 +1,70 @@
+table.tabelle {font: 80% "Verdana", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               padding: 0; margin: 0; border-collapse: collapse; width: 100%;}
+
+
+table.tabelle tbody {border-bottom: 1px solid #000000;}
+
+table.tabelle thead {border-bottom: 1px solid #000000;}
+
+table.tabelle tr{background: #FFFFFF;}
+
+table.tabelle th
+{
+        font: bold 15px Verdana;
+        color: #000000;
+        text-align: left;
+        font-weight: normal;
+
+}
+
+table.tabelle td
+{
+        font: 13px Verdana;
+        color: #000000;
+        text-align: left;
+        font-weight: normal;
+		border-bottom: 1px solid #000000;
+}
+
+
+
+html {
+  background: #FFFFFF;
+}
+
+
+
+.kopf
+{
+        font: bold 24px Verdana;
+        color: #000000;
+        padding: 6px 4px 6px 12px;
+}
+
+.notiz
+{
+        font: 12px Verdana;
+        color: #000000;
+        padding: 2px 4px 2px 12px;
+}
+
+.kopf_np
+{
+	display:none;
+}
+
+.hide {
+
+display:none;
+
+}
+
+#range-logo {
+
+display:none;
+
+}
+
+#page-break {page-break-before:always;}
+
+#page-break-inside {page-break-inside:auto;}

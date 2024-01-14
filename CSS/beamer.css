@@ -1,0 +1,60 @@
+a:link {
+    text-decoration: none;
+}
+
+html {
+  background-color: #FFFFFF;
+}
+
+.kopf
+{
+        font: bold 40px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 6px;
+}
+
+.unter
+{
+        font: bold 40px Verdana;
+        color: #444444;
+        padding: 6px 4px 6px 6px;
+}
+
+.time
+{
+        display: block;
+        width: 100px;
+        height: 50px;
+        position:fixed;
+        top:545px;
+        left:485px;
+
+        border: 5px solid #3366FF;
+        font: bold 40px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 6px;
+}
+
+.div-heber {
+
+  display: block;
+  background-color: #EFEFEF;
+  width: 97%;
+  height: 97%;
+  border-radius: 12px;
+  border: 1px solid #49556A;
+  box-shadow: 8px 8px 8px #666;
+
+
+}
+
+
+table.beamer 
+{
+        font: bold 40px Verdana;
+        color: #444444;
+        padding: 20px 4px 20px 6px;
+	border-collapse:collapse;
+}

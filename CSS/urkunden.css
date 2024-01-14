@@ -1,0 +1,173 @@
+table.tabelle {font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+               padding: 0; margin: 0; border-collapse: collapse; background: #F8F8FF;}
+
+table.tabelle tbody, table.tabelle thead {}
+
+
+
+table.tabelle thead {}
+
+table.tabelle tbody {}
+
+
+table.tabelle tbody td, table.tabelle tbody th {}
+
+table.tabelle tr{background: #F8F8FF;}
+
+
+table.tabelle td, table.tabelle th {
+   border-left: 1px solid #000000; }
+
+table.tabelle td:first-child, table.tabelle th:first-child {
+   border: none; }
+
+
+
+table.tabelle th
+{
+        font: bold 16px Verdana;
+        color: #000000;
+        padding: 5px 1px 5px 1px;
+        text-align: center;
+        font-weight: normal;
+
+}
+
+table.tabelle td
+{
+        font: 13px Verdana;
+        color: #444444;
+        padding: 4px 1px 4px 1px;
+        text-align: center;
+
+}
+
+h3
+{
+font-size: 30px;
+}
+
+
+html {
+  background: #F8F8FF;
+}
+
+
+
+.kopf
+{
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 2px 1px 2px 1px;
+}
+
+.unter {
+
+         font: bold 20px Verdana;
+         color: #444444;
+
+         }
+
+
+#Klasse {
+
+
+border-bottom: 1px solid #000000;
+border-top: 1px solid #000000;
+
+}
+
+#Klasse td{
+
+font: 14px Verdana;
+color: #000000;
+background-color: #E4E4E4;
+padding: 2px 1px 2px 1px;
+
+}
+
+
+
+#zwischenraum {
+height: 2px;
+border-top: 1px solid #000000;
+border-bottom: 1px solid #000000;
+}
+
+
+#zwischenraum td{
+padding: 0px 0px 0px 0px;
+
+}
+
+#range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:10px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+.durchstrich {text-decoration: line-through;}
+
+#unsichtbar {
+
+display:none;
+
+}
+
+
+@media screen
+{
+    .noPrint{}
+    .noScreen{display:none;}
+}
+
+@media print
+{
+    .noPrint{display:none;}
+    .noScreen{}
+}
+
+table.Unterschriften-Table{
+	margin-left:auto;
+	margin-right:auto;
+	padding: 0; border-collapse: collapse;
+	text-align: center;
+}
+table.Unterschriften-Table td
+{
+	text-align: center;
+	
+}
+
+#Unt-align-rechts{
+}
+
+.�berTabelleUnterschriften{
+	width:100%;
+	border:1px solid black;
+	text-align: center;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,684 @@
+<?php
+session_start();
+
+
+
+header('Content-Type: text/html; charset=utf-8');
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Heber Auswahl</title>
+<link rel="stylesheet" type="text/css" href="CSS/alg.css">
+<link rel="stylesheet" type="text/css" href="CSS/table.css">
+
+<script type='text/javascript' src="jquery-2.2.1.min.js"></script>
+<script type='text/javascript' src="JS/verein_heber_wahl.js"></script>
+
+<script type='text/javascript'>
+function showDiv() {
+   document.getElementById('neuer_heber_BL').style.display = "block";
+}
+</script>
+
+
+</head>
+
+
+
+<body>
+
+<form method="post" action="verein-heber-auswahl.php">
+
+<p class="kopf"><b>Heber Auswahl</b></p>
+
+<a href="verein-und-heberwahl.php" title="Link zur Planung" id="range-logo">Zurück</a>
+
+
+<span id="ajax-loeschen"></span>
+
+<div id="modal">
+  <div class="spinner">
+     <div class="bounce1"></div>
+     <div class="bounce2"></div>
+     <div class="bounce3"></div>
+  </div>
+</div>
+
+<?php
+
+
+ob_start ();
+error_reporting(0);
+
+include 'Outsorst/Code_auf_jeder_Seite.php';
+include 'funktionen/filter.php';
+include 'funktionen/db_verbindung.php';
+include 'funktionen/nuetzliches.php';
+
+function PageReload(){
+    echo"
+ <script>
+ setTimeout(function(){
+     location = 'verein-heber-auswahl.php'
+   },0)
+ </script>
+";
+}
+
+
+
+$db=dbVerbindung();
+$data_a_db[S_Db]=$_SESSION['WeK'];
+$datenbank = dbBefehl("SELECT * FROM stammdaten_wk_$data_a_db[S_Db]");
+$stammdaten = mysqli_fetch_assoc($datenbank);
+
+if($stammdaten['Online_Wk']==1){
+    $OnlineWk=1;
+}else{
+    $OnlineWk=0;
+}
+
+
+loginCheck($stammdaten);
+
+if($stammdaten['Online_Wk']==1) $OnlineWk=1;
+else $OnlineWk=0;
+
+function reload(){
+    echo"
+ <script>
+ setTimeout(function(){
+     location = 'verein-heber-auswahl.php'
+   },0)
+ </script>
+";
+}
+
+$Verein=$_SESSION['BL_Verein_auswahl'];
+
+
+
+//Unset Auswahl und neue Auswahl
+dbBefehl("UPDATE heber SET Auswahl=''");
+
+$aktu_auswahl = dbBefehl("SELECT heber.IdHeber,heber.Auswahl, heber_$data_a_db[S_Db].IdHeber
+                                    FROM heber, heber_$data_a_db[S_Db]
+                                      WHERE heber.IdHeber = heber_$data_a_db[S_Db].IdHeber");
+
+
+
+while($dataAktuell = mysqli_fetch_assoc($aktu_auswahl))
+{
+    if($dataAktuell['Auswahl']!="Auswahl"){
+        dbBefehl("UPDATE heber
+                              SET Auswahl='Auswahl'
+                              WHERE IdHeber = $dataAktuell[IdHeber]");
+    }
+}
+
+//Ende------------------------------
+
+
+if($OnlineWk==1){
+$heber = dbBefehl("SELECT * FROM heber, verein, heber_$data_a_db[S_Db]
+					Where verein.IdVerein = '$Verein' 
+					And heber.Bundesliga='1' 
+					AND heber.IdVerein = verein.IdVerein
+                    AND heber_$data_a_db[S_Db].IdHeber = heber.IdHeber
+					ORDER BY heber.Name ASC");
+}else{
+    $heber = dbBefehl("SELECT * FROM heber, verein
+					Where verein.IdVerein = '$Verein'
+					And heber.Bundesliga='1'
+					AND heber.IdVerein = verein.IdVerein
+					ORDER BY heber.Name ASC");
+}
+
+$x=0;
+
+
+
+echo"<br><br><br>";
+
+
+echo "
+<div id=\"divid1\" class=\"examplediv\">
+<table class=\"tabelle\"  border=\"1\" cellpadding=\"0\" cellspacing=\"2\" >";
+
+/*  
+<colgroup>";
+if($OnlineWk==0) echo "<col width=\"80\">";
+echo"
+    <col width=\"250\">
+    <col width=\"250\">
+    <col width=\"50\">
+    <col width=\"110\">
+    <col width=\"50\">
+
+  </colgroup>
+*/
+
+echo"
+<thead>
+
+ <tr>";
+if($OnlineWk==0) echo "<th>Auswahl</th>";
+echo"
+  <th>Name</th>
+  <th>Verein</th>
+  <th>M/W</th>
+  <th>Gruppe</th>
+  <th>Ausserkonkurrenz</th>";
+if($OnlineWk==1) echo "<th>Heber Verzichtet</th>";
+if($OnlineWk==0) echo "<th>Auslaenderwertung</th>";
+ echo"</tr>
+</thead>
+";
+
+
+
+
+
+$time=getdate();
+
+$i = 0;
+
+
+
+while($dsatz = mysqli_fetch_assoc($heber))                                                      // Anlegen der Tabelle(IdHeber muss ai sein)
+{
+
+safe_AlKl_GwKl($dsatz,$stammdaten);    // htdocs/funktionen/nuetzliches.php safe AlKl und GwKl
+
+$i = $i+1;
+
+
+     $Id="Id" . $i;
+     $Name="Name" . $i;
+     $Vorname="Vorname" . $i;
+     $Jahrgang="Jahrgang" . $i;
+     $Loeschen="Loeschen" . $i;
+     $Gewicht="Gewicht" . $i;
+     $Land="Land" . $i;
+     $Geschlecht="Geschlecht" . $i;
+     $Auswahl="Auswahl" . $i;
+     $Gruppe="Gruppe" . $i;
+     $Ak_Set="Ak_Set" . $i;
+     $Ak_UnSet="Ak_UnSet" . $i;
+     $Kick="Kick" . $i;
+     $IdHeber=$dsatz['IdHeber'];
+     $Auslaender_Button="Auslaender_Button" . $i;
+
+
+
+echo "<input type=\"text\" name=$Id size=\"0\" style=\" display: none; \" value=\"$dsatz[IdHeber]\"readonly>";
+
+
+
+
+if ($i % 2 != 0) {                                            //ungerades und gerades i indikator
+
+echo "<tbody class=\"ungerade\">";
+
+} else {
+
+echo "<tbody class=\"gerade\">";
+
+}
+
+
+echo "<tr align=\"center\">";
+
+if($OnlineWk==0){
+     echo "<td align=\"center\">";
+       if($dsatz[Auswahl]=="Auswahl")
+           echo "<input type=\"checkbox\" name=$Auswahl value=\"Auswahl\" checked>";
+       else
+           echo "<input type=\"checkbox\" name=$Auswahl value=\"Auswahl\">";
+     echo "</td>";
+}
+
+     echo "<td>";
+
+         echo "<span style=\"width:100px;display:block;float:left;\"> $dsatz[Name] </span>";
+         echo $dsatz[Vorname];
+
+
+     echo "<td>";
+           echo $dsatz[Verein];
+     echo "</td>";
+
+
+     echo "<td>";
+         if($dsatz[Geschlecht]=='Männlich') $Ges='M';
+         if($dsatz[Geschlecht]=='Weiblich') $Ges='W';
+
+            echo $Ges;
+     echo "</td>";
+
+
+     echo "<td>";
+
+         echo "<select name=\"$Gruppe\" size=\"1\" class=\"Auswahl\">";
+
+         $DGruppe = dbBefehl("SELECT Gruppe
+                              FROM heber_$data_a_db[S_Db]
+                              WHERE IdHeber = '" . $dsatz[IdHeber] . "'
+                              ");
+         echo "<option value=\"\" selected>keine Auswahl</option>";
+
+         $DGrp = mysqli_fetch_assoc($DGruppe);
+
+         				for($k=1;$k<=3;$k++){ //$stammdaten['Verein_Anzahl']
+                            if($k==$DGrp[Gruppe])
+                                echo "<option value=$k selected>$k</option>";
+                            else
+                                echo "<option value=$k>$k</option>";
+                        }
+         
+        echo "</select>";
+     echo "</td>";
+     
+     if($OnlineWk==0){
+         $DataAK = dbBefehl("SELECT Ausserkonkurrenz FROM heber_$data_a_db[S_Db] WHERE IdHeber=$dsatz[IdHeber]");
+         $D_AK = mysqli_fetch_assoc($DataAK);
+         $dsatz['Ausserkonkurrenz']=$D_AK['Ausserkonkurrenz'];
+     }
+     
+     echo "<td>"; 
+     
+     if($dsatz['Ausserkonkurrenz']=="Ausserkonkurrenz"){ 
+         echo "<span style=\"width:150px;display:block;float:left;\">".$dsatz['Ausserkonkurrenz']."</span>";
+         echo "<input type=\"submit\" style=\"float: right;\" name=\"$Ak_UnSet\" value=\"Unset AK\">";
+     }else{
+         echo "<span style=\"width:150px;display:block;float:left;\">Konkurrenz</span>";
+         echo "<input type=\"submit\" style=\"float: right;\" name=\"$Ak_Set\" value=\"Set AK\">";
+     }
+     
+     echo "</td>";
+
+   if($OnlineWk==1){
+     echo "<td>";
+    
+     echo "<button type=\"button\" style=\"float: right;\" onclick=\"kick(this.value)\" value=\"$dsatz[IdHeber]\">Loeschen</button>";
+     echo "</td>";
+   }
+   
+   if($OnlineWk==0){
+   	echo "<td>";
+   	if($dsatz['Auslaenderwertung']==0){
+   		echo "<span style=\"width:150px;display:block;float:left;\">Deutsch</span>";
+   		echo "<input type=\"submit\" style=\"float: right;\" name=\"$Auslaender_Button\" value=\"Set Aus\">";
+   	}else{
+   		echo "<span style=\"width:150px;display:block;float:left;\">Ausland</span>";
+   		echo "<input type=\"submit\" style=\"float: right;\" name=\"$Auslaender_Button\" value=\"Set Ger\">";
+   	}
+   	echo "</td>";
+   }
+     
+echo "</tr>";
+
+
+if(isset($_POST['Ak_Set'.$i]))
+{
+    $x=1;   
+    
+    dbBefehl("UPDATE heber_$data_a_db[S_Db]
+                              SET Ausserkonkurrenz = 'Ausserkonkurrenz'
+                              WHERE IdHeber ='" . $_POST['Id' . $i] . "'");  
+    
+    reload();
+}
+
+
+if(isset($_POST['Ak_UnSet'.$i]))
+{    
+    $x=1;   
+    
+    dbBefehl("UPDATE heber_$data_a_db[S_Db]
+                              SET Ausserkonkurrenz = ''
+                              WHERE IdHeber ='" . $_POST['Id' . $i] . "'");  
+    
+    reload();
+}
+
+if(isset($_POST['Auslaender_Button'.$i]))
+{
+	$x=1;
+	if ($_POST['Auslaenderwertung' . $i] == 'Set Aus'){
+		$AusValue=0;
+	}else{
+		$AusValue=1;
+	}
+	
+	dbBefehl("UPDATE heber_$data_a_db[S_Db]
+			SET Auslaenderwertung = $AusValue
+			WHERE IdHeber ='" . $_POST['Id' . $i] . "'");
+	
+	reload();
+}
+
+
+     if(isset($_POST['Loeschen' . $i]))                                                                                          //Loeschen
+         {
+          $x=1;
+            
+          HeberLoeschen($IdHeber);   //Aus funktionen/nuetzliches
+
+          $new_Heber="1";
+
+         }
+
+
+
+         if((isset($_POST['speichern'])))
+         {
+
+
+             $x=1;
+
+             if($NurEinmalUserBlock==0){
+                 dbBefehl("UPDATE user_blocker_$data_a_db[S_Db] SET GrpEinteilung = '1'");
+                 $NurEinmalUserBlock++;
+             }
+
+
+
+                 dbBefehl("UPDATE heber
+                              SET Auswahl= '" . $_POST['Auswahl' . $i] . "'
+                              WHERE IdHeber ='" . $_POST['Id' . $i] . "'");
+
+
+
+
+         $Safe = dbBefehl("SELECT * FROM heber_$data_a_db[S_Db]");
+
+       $z=0;
+
+    if($OnlineWk==0){   //Auswahl nur anpassen f�r Online Wk
+         if($_POST['Auswahl' . $i] == "Auswahl")
+         {
+                 while($dataSafe = mysqli_fetch_assoc($Safe))
+                 {
+
+                         if($dataSafe[IdHeber] == "" . $_POST['Id' . $i] . "")
+                         {
+                          	$z=1;
+                         }
+                  }
+
+
+                 if($z==0)
+                 {
+                         dbBefehl("INSERT INTO heber_$data_a_db[S_Db] (IdHeber)
+                                      Values ('" . $_POST['Id' . $i] . "')");
+
+                         dbBefehl("INSERT INTO heber_wk_$data_a_db[S_Db] (IdHeber, Versuch)
+                                      Values ('" . $_POST['Id' . $i] . "', '1')");
+
+                         dbBefehl("INSERT INTO heber_wk_$data_a_db[S_Db] (IdHeber, Versuch)
+                                      Values ('" . $_POST['Id' . $i] . "', '2')");
+
+                         dbBefehl("INSERT INTO heber_wk_$data_a_db[S_Db] (IdHeber, Versuch)
+                                      Values ('" . $_POST['Id' . $i] . "', '3')");
+                 }
+
+
+
+
+         }
+    
+
+         if($_POST['Auswahl' . $i] == false)
+         {
+            
+            
+             HeberLoeschen($IdHeber);   //Aus funktionen/nuetzliches
+            
+           
+         }
+    }//Schliesst if!=OnlineWK
+
+    
+    
+         if(($_POST[$Gruppe])!='')
+                    dbBefehl("UPDATE heber_$data_a_db[S_Db]
+                              SET Gruppe= '" . $_POST[$Gruppe] . "'
+                              WHERE IdHeber ='" . $_POST['Id' . $i] . "'");
+
+}
+
+
+}
+echo "</tbody>";
+echo "</table>";
+
+
+
+
+
+if($OnlineWk==1){
+     
+    echo '<div id="neuer_heber_BL">';
+    
+    echo '<table id="neuer_heber_tabelle">';
+    echo '<tr>';
+        echo '<td>';
+        echo 'AthletId:';
+        echo '</td>';
+        
+        echo '<td>';
+        echo '<input type="input" name="athlet_id" value="">';
+        echo '</td>';
+        
+        echo '<td>';
+        echo 'Vorname:';
+        echo '</td>';
+        
+        echo '<td>';
+        echo '<input type="input" name="athlet_vorname" value="">';
+        echo '</td>';
+        
+        echo '<td>';
+        echo 'Name:';
+        echo '</td>';
+        
+        echo '<td>';
+        echo '<input type="input" name="athlet_name" value="">';
+        echo '</td>';
+
+
+     echo '</tr>';
+     
+     
+     echo '<tr>';
+     
+     echo '<td>';
+     echo 'AthletId-Wiederholen:';
+     echo '</td>';
+     
+     echo '<td>';
+     echo '<input type="input" name="athlet_id_wiederholung" value="">';
+     echo '</td>';
+     
+     
+     echo '<td>';
+     echo 'Geschlecht:';
+     echo '</td>';
+     
+     
+     echo '<td>';
+     echo "<select id=\"Auswahl\" name=\"Geschlecht\" size=\"1\" class=\"Auswahl\"><br>";
+          
+     for($kkk=1;$kkk<=2;$kkk++){
+         if($kkk==1) $Ges='M';
+         else $Ges='W';
+         
+         echo "<option value=$kkk>$Ges</option>";
+     }
+     
+     echo "</select>";
+     echo '</td>';
+     
+     echo '<td>';
+     echo 'Jahrgang:';
+     echo '</td>';
+     
+     echo '<td>';
+     echo '<input type="input" name="Jahrgang" value="">';
+     echo '</td>';  
+     
+     echo '</tr>';
+     
+     echo '<tr>';
+     
+     echo '<td>';
+     echo 'Wertung als:';
+     echo '</td>';
+     
+     
+     echo '<td>';
+     echo "<select id=\"Auswahl\" name=\"Nationalitaet\" size=\"1\" class=\"Auswahl\"><br>";
+             
+     echo "<option value=0>Deutscher</option>";
+     echo "<option value=1>Nicht Deutscher</option>";
+     
+     
+     echo "</select>";
+     echo '</td>';
+     
+     echo '</tr>';
+    echo '</table>';
+    
+    echo '<br>';
+    echo '<input type="submit" id="neuer_heber_erstellen" name="neuer_heber_erstellen" value="Erstellen">';
+    
+    echo '<br>';
+    echo '<br>';
+    echo '<input type="submit" id="neuer_heber_erstellen" name="close" value="Schliessen">';
+    
+    echo '</div>';
+ 
+    
+    
+    
+    if(isset($_POST['neuer_heber_erstellen']) )                                                       //Mehr Zeilen
+    {
+              
+        if(!isInteger($_POST['athlet_id'])){
+            echo"
+                <script>
+                    alert('Athleten Id ist keine gültige Zahl!');
+                </script>
+                ";
+        }else{
+        
+        if($_POST['athlet_id']=='' || ($_POST['athlet_id'] != $_POST['athlet_id_wiederholung']) )                                                       //Mehr Zeilen
+        {
+            echo"
+                <script>
+                    alert('Athleten Id wurde nicht richtig ausgefüllt!');
+                </script>
+                ";
+            
+        }else{
+            
+            $IdHeber_Online=$_POST['athlet_id'];
+            $Vorname=$_POST['athlet_vorname'];
+            $Name=$_POST['athlet_name'];
+            $Jahrgang=$_POST['Jahrgang'];
+            if($_POST['Nationalitaet']==0){
+                $IdNation=1;
+                $Auslaenderwertnug=0;
+            }
+            else{
+                $IdNation=3;
+                $Auslaenderwertnug=1;
+            }
+                
+            if($_POST['Geschlecht']==1) $Geschlecht='Männlich';
+            else                        $Geschlecht='Weiblich';
+            
+            
+            
+            
+            if( check_if_online_id_exists($_POST['athlet_id']) == 0){   //Aus funktionen/nuetzliches
+                dbBefehl("INSERT INTO heber (Id_Online_Db, Name, Vorname, Geschlecht, Jahrgang, 
+                                             IdStaat, IdVerein, Bundesliga, Gewicht)
+                            Values ('$IdHeber_Online','$Name', '$Vorname', '$Geschlecht', '$Jahrgang',
+                                    '$IdNation','$Verein', '1', '1')");
+                
+                
+                
+            }else{
+                
+            	dbBefehl("DELETE FROM heber WHERE Id_Online_Db =$IdHeber_Online;");
+            	
+            	dbBefehl("INSERT INTO heber (Id_Online_Db, Name, Vorname, Geschlecht, Jahrgang,
+            			IdStaat, IdVerein, Bundesliga, Gewicht)
+            			Values ('$IdHeber_Online','$Name', '$Vorname', '$Geschlecht', '$Jahrgang',
+            			'$IdNation','$Verein', '1', '1')");
+            	
+            	/*
+                dbBefehl("Update heber
+                            Set Name='$Name', Vorname='$Vorname', Geschlecht= '$Geschlecht', IdVerein= '$Verein', Bundesliga='1', IdStaat='$IdNation'
+                            Where Id_Online_Db= '$IdHeber_Online'
+                        ");
+                        
+                 */
+            }
+            $IdHeber=get_id_heber_from_id_online($IdHeber_Online);
+            safe_AlKl_GwKl ($IdHeber,$stammdaten);
+            heber_in_wk_tabellen($IdHeber);
+            
+                    
+            dbBefehl("Update heber_$data_a_db[S_Db]
+                            Set Auslaenderwertung='$Auslaenderwertnug'
+                            Where IdHeber= '$IdHeber'
+                        ");
+            
+            $x=1;
+                 
+        }      
+     }//If athlet id is integer
+     
+     
+        
+    }   //If isset neuer Heber
+   
+}   //If wk = Online WK
+
+
+if($OnlineWk==1){
+    echo '<br>
+    <br>
+    <input type="button" name="answer" value="Neuer Heber" onclick="showDiv()" />';
+}
+
+
+
+if($x==1)
+{
+    echo"
+ <script>
+ setTimeout(function(){
+     location = 'verein-heber-auswahl.php'
+   },0)
+ </script>
+";
+}
+
+
+?>
+
+
+
+<br>
+<br>
+<input id="always-safe"  type="submit" name="speichern" value="Speichern">
+
+
+</form>
+</body>
+</html>

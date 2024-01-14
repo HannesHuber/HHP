@@ -1,0 +1,31 @@
+table {font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+padding: 0; margin: 0; border-collapse: collapse; color: #333; background: #B3B2D1;}
+
+
+
+th
+{       align=\"left\"
+        font: bold 14px Verdana;
+        color: #000000;
+        border-right: 1px solid #FFFFFF;
+        border-bottom: 1px solid #FFFFFF;
+        border-top: 1px solid #FFFFFF;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 12px 12px 12px 24px;
+
+}
+
+td
+{
+        align=\"left\"
+        font: bold 12px Verdana;
+        color: #000000;
+        border-right: 1px solid #FFFFFF;
+        border-bottom: 1px solid #FFFFFF;
+        border-top: 1px solid #FFFFFF;
+
+
+
+}

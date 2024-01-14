@@ -1,0 +1,132 @@
+html {
+  background-color: black;
+
+}
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('Fonts/digital-7.ttf');
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.kopf
+{
+        font: bold 1cm Verdana;
+        color: #444444;
+        padding: 0;
+}
+
+.unter {
+
+         font: bold 0.8cm Verdana;
+         color: #444444;
+
+         }
+
+#range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:10px;
+    right:1cm;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+#always-safe {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    bottom: 1cm;
+    right:1cm;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 20px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 3mm 4mm;
+}
+
+
+.Button {
+	font: 2cm Verdana;
+	position: relative;
+	margin: 0;
+	padding: 0mm;
+	width: 100%;
+	height:100%;
+	background: transparent;
+	color: black;
+	border: 0px;
+	cursor: pointer;
+}
+.Button:hover{
+	outline: none;
+	background: #DFDFF9;
+	color: darkblue;
+}
+#demo{
+	
+	font-size:12vmin;
+	
+}
+
+#showTime{
+	font-family:'digital-clock-font';
+	font-size:40vmin;
+	color: red;
+	
+}
+
+#justTime{
+	font-family:'digital-clock-font';
+	font-size:95vmin;
+	color: red;
+	
+}
+
+#middle{
+	text-align:center;
+	
+}
+
+
+.krtext{
+font-family:Arial, sans-serif; font-weight:normal; font-size:50;
+}
+
+table.ttable  {border-collapse:collapse;border-spacing:0; height:95%; width:95%; table-layout:fixed; border-style:solid;border-width:0px;overflow:hidden;word-break:normal;				
+				margin-left:auto; margin-right:auto;}
+				
+table.ttable th{font-family:Arial, sans-serif; font-weight:normal;padding:0;}
+table.ttable td{font-family:Arial, sans-serif; padding:0.5vmin; text-align: center; vertical-align:middle;}
+
+
+table.tg  {border-collapse:collapse;border-spacing:0; height:100%; width:100%; table-layout:fixed; border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+table.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:2px 1px; height:10px;}
+table.tg td{font-family:Arial, sans-serif;font-size:14px;padding:0; text-align: center; vertical-align:middle}
+table.tg .tg-yw4l{}
+table.tg .tg-u722{background-color:#34ff34;}
+table.tg .tg-q9qv{background-color:#fe0000;}
+
+

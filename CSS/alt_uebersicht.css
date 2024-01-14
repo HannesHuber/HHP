@@ -1,0 +1,251 @@
+html {
+	background: white;
+}
+/*
+ th {border: 1px solid #EAECEE; text-align: left;}
+*/
+
+
+table.BlTabelle{
+	font:bold 28px Verdana;
+	text-align:left;
+	table-layout:fixed;
+	width:100%;
+	border-collapse: collapse;
+}
+
+table.BlTabelle th {
+	overflow:hidden;
+	white-space:nowrap;
+
+}
+
+
+/*overflow:hidden;white-space:nowrap; */
+table.tabelle td {border: 2px solid black; text-align: left; padding-left:3px; padding-right:3px; min-width:1em; overflow:hidden;white-space:nowrap;}
+
+table.tabelle {  font-family: "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+  background: white; text-align: left; border-collapse: collapse; font-weight:bold; table-layout:fixed; width:100%;}  /*table-layout:fixed; */
+
+table.tabelle thead { text-align: left;}
+
+table.tabelle tbody { text-align: left;}
+
+table.tabelle thead th {color: black; text-align: left;}
+
+table.tabelle caption {text-align: left; text-transform: uppercase;  padding-bottom: 10px; font: 200% "Lucida Grande",
+						"Lucida Sans Unicode", "Trebuchet MS", sans-serif;}
+
+table.tabelle.th
+{
+        letter-spacing: 2px;
+        text-align: left;
+        padding: 6px 6px 6px 12px;
+}
+
+
+table.tabelle tfoot {
+
+padding: 0;
+margin: 0;
+border-collapse: collapse;
+color: #333;
+background: black;
+
+}
+
+#e-col {
+	border: none;
+	max-width: 3px;
+	min-width: 3px;
+
+	}
+
+.showTimeBox {
+	width:90%;
+    background-color: white;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    border: 2px solid lightblue;
+
+        font-family:Verdana;
+        font-size:50px;
+        color: #d58a00;
+        text-align: center;
+        text-decoration:none;
+
+}
+
+#center {text-align: center;}
+
+
+
+#Next {
+	color: #000000;
+	background-color: #ff8040;
+}
+#Now {
+	color: #000000;
+	background-color: #12F70A;
+	border: 3px solid red !important;
+}
+
+
+.durchstrich {text-decoration: line-through;}
+
+a:link {
+    text-decoration: none;
+}
+
+.kopf
+{
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        padding: 6px 4px 6px 12px;
+}
+
+.unter {
+
+         font: bold 20px Verdana;
+         color: #444444;
+
+         }
+
+
+#result{
+	color: #000000;
+	background-color: #EFFE03;
+}
+
+#Verein{
+
+
+	color: #000000;
+
+}
+
+#range-logo {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:10px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+#always-safe {
+    background-color: #f8f8ff;
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    position:fixed;
+    top:200px;
+    right:60px;
+    box-shadow: 8px 8px 8px #666;
+    border-radius: 12px;
+    border: 2px solid #ACBFFF;
+
+        font: bold 30px Verdana;
+        color: #444444;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration:none;
+        padding: 12px 25px 12px 25px;
+
+}
+
+#noBorder{
+
+	border: 0;
+}
+
+#zwischenraum {
+height: 8px;
+border-top: 1px solid #00000;
+border-bottom: 1px solid #000000;
+}
+
+#bild{
+	height:  27px;
+	width: 46px;
+}
+#rahmen{
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+	height:  27px;
+    width: 46px;
+}
+
+#Next {
+	color: #000000;
+	background-color: #12F70A;
+}
+/*background-color: #12F70A;  background-color: #e8e7e5;*/
+#Now {
+	color: #000000;
+	background-color: #12F70A;
+	border: 3px solid red !important;
+}
+
+
+
+#RS1J{
+	color: black;
+	background-color: #bbeeff;
+}
+/*#1C20AE*/
+#RS1N{
+	color: black;
+	background-color: #ffc4b9;
+
+
+}
+/*#EC0E12*/
+
+#Erg {
+	color: #000000;
+	background-color: #f9f4ca;
+	}
+	/*background-color: #EFFE03;*/
+
+
+#trNow{
+	color: #000000;
+	background-color: #f8efcf;
+	border: 3px solid orangered !important;
+}
+/*bg-color: #2fff2f  #f0e0a2 */
+
+#trNext {
+	color: #000000;
+	background-color: #f3f1e7;
+	border: 1px solid black !important;
+}
+/*background-color: #ff8040;  background-color: #e8e7e5;*/
+
+#tr_norm {
+	color: #000000;
+	background-color: #C5FCAD;	
+	border: 1px solid black !important;
+}
+
+#naechstesHeberGewichtSpalte{
+	color: #000000;
+	background-color: #f7f5f4;
+}
+/*background-color: #ffc28c;  background-color: #e8e7e5;*/

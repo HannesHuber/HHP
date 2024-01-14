@@ -1,0 +1,110 @@
+<?php
+session_start();
+if (empty($_SESSION['al_kl_setup_error'])) {
+    $_SESSION['al_kl_setup_error'] = 0;
+}
+header('Content-Type: text/html; charset=utf-8');
+?>
+
+<head>
+<title>Ultima</title>
+<meta name="author" content="H-Pc">
+
+<script type='text/javascript' src="check_funktion.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../CSS/alg.css">
+<link rel="stylesheet" type="text/css" href="../../CSS/table.css">
+
+
+</head>
+<body>
+
+<form method="post" action="sinclair-faktoren.php">
+
+<p class="kopf"><b>Sinclair-Faktoren</b></p>
+<p>Hinweis:</p>
+<p>Der Sinclair-Faktor wird anhand dieser Faktoren berechnet die für jede Olympiade neu berechnet werden.</p>
+<p>Für genauere Information besuchen Sie die Seite www.iwf.net unter Sinclair Coefficient.</p>
+<p>Die verwendete Formel hat die Form (z.B. für Frauen): </p>
+<p>Sinclair Faktor =  10**(A(Frauen)*log10(HeberGewicht/b(Frauen)**2)</p>
+<p>Sinclair gesamt(Pkt) =  gesamt(kg) x Sinclair Faktor
+<br>
+<p>Änderungen in dieser Tabelle sind Wettkampf übergreifend</p>
+
+<a href="alg_einstellungen.php" title="Link zu den Einstellungen" id="range-logo">Einstellungen</a>
+
+<table class="tabelle" border="1">
+  <colgroup>
+    <col>
+    <col>
+    <col>
+  </colgroup>
+
+<thead>
+ <tr>
+  <th></th>
+  <th>Männer</th>
+  <th>Frauen</th>
+ </tr>
+</thead>
+
+<?php
+
+ob_start ();
+error_reporting(1);
+
+include '../funktionen/db_verbindung.php';
+$db=dbVerbindung();
+
+$data = dbBefehl("SELECT * FROM sinclair_faktoren");
+$dsatz = mysqli_fetch_assoc($data);
+
+echo '<tr>';
+	echo '<th>A</th>';
+	echo '<td><input type="text" name="Sin_Koef_M" value="' . $dsatz['Sin_Koef_M'] . '"></td>';
+	echo '<td><input type="text" name="Sin_Koef_W" value="' . $dsatz['Sin_Koef_W'] . '"></td>';
+echo '</tr>';
+
+echo '<tr>';
+	echo '<th>b</th>';
+	echo '<td><input type="text" name="Sin_Gew_M" value="' . $dsatz['Sin_Gew_M'] . '"></td>';
+	echo '<td><input type="text" name="Sin_Gew_W" value="' . $dsatz['Sin_Gew_W'] . '"></td>';
+echo '</tr>';
+
+if(isset($_POST['speichern']))                                                                                          //Speichern
+{
+	$x=1;
+
+	dbBefehl("UPDATE sinclair_faktoren
+				Set Sin_Koef_M='" . $_POST['Sin_Koef_M'] . "',
+					Sin_Koef_W='" . $_POST['Sin_Koef_W'] . "',
+					Sin_Gew_M='" . $_POST['Sin_Gew_M'] . "',
+					Sin_Gew_W='" . $_POST['Sin_Gew_W'] . "'
+			");
+}
+?>
+
+</table>
+
+
+<br>
+<br>
+<input id="always-safe" type="submit" name="speichern" value="Speichern">
+
+<?php
+
+if($x==1)
+{
+echo"
+ <script>
+ setTimeout(function(){
+     location = 'sinclair-faktoren.php'
+   },0)
+ </script>
+";
+}
+
+?>
+</form>
+</body>
+</html>
